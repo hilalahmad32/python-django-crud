@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home page {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="card my-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-item-center">
+                <h3>Products ( {{products|length}} )</h3>
+                <a href="/create" class="btn btn-success">New</a>
+            </div>
+        </div>
+    </div>
+    <div >
+        <form action="" class="d-flex justify-content-end align-items-center w-50">
+            <input type="text" name="search" placeholder="Search..." class="form-control" id="">
+        <button class="btn btn-success m-3">Search</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{product.id}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.content}}</td>
+                    <td><a href="/edit/{{product.id}}" class="btn btn-success">Edit</a></td>
+                    <td><a href="/delete/{{product.id}}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if products.has_other_pages %}
+  <ul class="pagination d-flex justify-content-center align-items-center">
+    {% if products.has_previous %}
+      <li><a href="?page={{ products.previous_page_number }}" class="btn btn-primary m-2">Prev</a></li>
+    {% endif %}
+    {% for i in products.paginator.page_range %}
+      {% if products.number == i %}
+        <li class="btn btn-secondary">{{ i }} </li>
+      {% else %}
+        <li ><a href="?page={{ i }}" class="btn btn-primary m-2">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if products.has_next %}
+      <li><a href="?page={{ products.next_page_number }}" class="btn btn-primary m-2">Next</a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+    </div>
+</div>
+{% endblock content %}

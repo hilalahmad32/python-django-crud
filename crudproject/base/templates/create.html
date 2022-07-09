@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home page {% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
+            <a href="/" class="my-2 btn btn-secondary">Go back</a>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="my-3">
+                    <label for="">Enter Title</label>
+                    <input type="text" name="title" id="" class="form-control">
+                </div>
+                <div class="my-3">
+                    <label for="">Enter Price</label>
+                    <input type="text" name="price" id="" class="form-control">
+                </div>
+                <div class="my-3">
+                    <label for="">Enter Content</label>
+                    <input type="text" name="content" id="" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
